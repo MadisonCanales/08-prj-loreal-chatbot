@@ -102,6 +102,9 @@ async function getAIResponse(userMessage) {
 
   const data = await response.json();
 
+console.log("STATUS:", response.status);
+console.log("WORKER DATA:", data);
+
   console.log("Worker Response:", data);
 
 

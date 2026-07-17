@@ -1,13 +1,18 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "08-prj-loreal-chatbot",
+  "main": "RESOURCE_cloudflare-worker.js",
   "compatibility_date": "2026-07-17",
+
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS"
+  },
+
   "observability": {
     "enabled": true
   },
-  "assets": {
-    "directory": "."
-  },
+
   "compatibility_flags": [
     "nodejs_compat"
   ]

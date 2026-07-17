@@ -2,13 +2,13 @@ export default {
   async fetch(request, env) {
 
     const corsHeaders = {
-      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Origin": "https://madisoncanales.github.io",
       "Access-Control-Allow-Methods": "POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type"
     };
 
 
-    // Handle CORS preflight
+    // Allow browser preflight
     if (request.method === "OPTIONS") {
       return new Response(null, {
         status: 204,
@@ -17,24 +17,21 @@ export default {
     }
 
 
-    // Chatbot API request
+    // Chat request
     if (request.method === "POST") {
 
       try {
 
         const body = await request.json();
 
-
-        const response = await fetch(
+        const openAIResponse = await fetch(
           "https://api.openai.com/v1/chat/completions",
           {
             method: "POST",
-
             headers: {
               "Authorization": `Bearer ${env.OPENAI_API_KEY}`,
               "Content-Type": "application/json"
             },
-
             body: JSON.stringify({
               model: "gpt-4o-mini",
               messages: body.messages,
@@ -44,13 +41,12 @@ export default {
         );
 
 
-        const data = await response.json();
-
+        const data = await openAIResponse.json();
 
         return new Response(
           JSON.stringify(data),
           {
-            status: response.status,
+            status: openAIResponse.status,
             headers: {
               ...corsHeaders,
               "Content-Type": "application/json"
@@ -73,12 +69,12 @@ export default {
             }
           }
         );
+
       }
     }
 
 
-    // Serve your website files
+    // Website files
     return env.ASSETS.fetch(request);
-
   }
 };

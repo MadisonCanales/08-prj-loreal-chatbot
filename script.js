@@ -4,7 +4,7 @@ const userInput = document.getElementById("userInput");
 const chatWindow = document.getElementById("chatWindow");
 
 /* Replace with your Cloudflare Worker URL */
-const WORKER_URL = "https://loreal-assistant.madison.workers.dev"; 
+const WORKER_URL = "https://loreal-assistant.workers.dev"; 
 /* L'Oréal System Prompt */
 const SYSTEM_PROMPT = `
 You are the L'Oréal Beauty Assistant.
